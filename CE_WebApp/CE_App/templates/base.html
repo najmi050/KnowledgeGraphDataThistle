@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet "type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    {% block title %} <h2  style="text-align: center"> Cultural Events Knowledge Graph Exploration </h2> {% endblock %}
+      {%block head%}
+<style> 
+    
+    #one {
+        float:left; 
+        
+        width:25%;
+        
+    }
+    #two{
+        float:left; 
+        background:Gray;
+        width:25%;
+        
+    }
+    #three{
+        float:left; 
+        
+        width:25%;
+    }
+    #four{
+        float:left; 
+        background:Gray;
+        width:25%;
+    }
+    #Evnt {
+        float:left; 
+        
+        width:25%;
+        
+    }
+    #scheds{
+        float:left; 
+        
+        width:25%;
+        
+    }
+    #perfs{
+        float:left; 
+        
+        width:25%;
+    }
+    #places{
+        float:left; 
+        
+        width:25%;
+    }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+       
+      }
+ 
+
+</style> 
+{%endblock%}
+      
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('home_page')}}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('VisualseEventCatFreq')}}">Event Level </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('VisualseCatFreq')}}">Schedule Level </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="{{ url_for('VisualsePerformanceCatFreq')}}">Performance Level </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+       
+
+
+    </nav>
+</body>
+   
+       
+        {% block content %}
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+        <link rel="stylesheet "type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+       
+        <div class="question">
+            <button id="one" class="wrongAnswer" onclick="showResultE()">Total Events</button>
+            
+            <button id="two" class="wrongAnswer" onclick="showResultS()">Total Schedules</button>
+            
+            <button id="three" class="wrongAnswer" onclick="showResultP()">Total Perfomances</button>
+            
+            <button id="four" class="wrongAnswer" onclick="showResultPl()">Total Places</button>
+            
+            <h4 id='Evnt'></h4>
+            <h4 id='scheds'></h4>
+            <h4 id='perfs'></h4>
+            <h4 id='places'></h4>
+
+          </div>
+          <script>
+          function showResultE() {
+            var res = document.getElementById('Evnt');
+            if(res.innerHTML== {{ TotalEvents}}){
+                res.innerHTML="";
+
+            }
+            else{
+                res.innerHTML= {{ TotalEvents}};
+
+            }
+            
+          }
+          function showResultS() {
+            var res = document.getElementById('scheds');
+            if(res.innerHTML== {{ Total_Schedules}}){
+                res.innerHTML="";
+
+            }
+            else{
+                res.innerHTML= {{ Total_Schedules}};
+
+            }
+            
+          }
+          function showResultP() {
+            var res = document.getElementById('perfs');
+            if(res.innerHTML== {{ TotalPerformances}}){
+                res.innerHTML="";
+
+            }
+            else{
+                res.innerHTML= {{ TotalPerformances}};
+
+            }
+        }
+            function showResultPl() {
+                var res = document.getElementById('places');
+                if(res.innerHTML== {{ TotalPlaces}}){
+                    res.innerHTML="";
+    
+                }
+                else{
+                    res.innerHTML= {{ TotalPlaces}};
+    
+                }
+          }
+        </script>
+        
+        {% endblock %}
+  
+
+        <!-- Optional JavaScript -->
+    	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+ 
+ 
+      {% block footer %} 
+
+      <img  src="{{ url_for('static', filename='rdf/dataModel.png') }}" alt="Resultado final" class="center">
+     
+      {% endblock %}
+ 
+
+</html>

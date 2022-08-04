@@ -1,0 +1,80 @@
+{% extends 'EventVizHomePage.html' %}
+{%block head%}
+<style>
+    #City_data{
+        display: none;
+    }
+    </style>
+{%endblock%}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <form method="POST" action="/VisuliseEventCatgory" >
+             
+            
+                    
+            <select name="city" class=="selectpicker form-control">
+                <option value="" disabled selected>Select City</option>
+                <option value="None"> All</option>
+              {% for o in CityList %}
+              <option value="{{ o }}">{{ o }}</option>
+              {% endfor %}
+            </select>
+    <input type='submit' value='Filter'>
+</form>
+</head>
+    <body>
+       
+    <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot_ | safe}};
+            Plotly.plot('bargraph',graphs,{});
+        </script>
+       </div>
+       <h2>Tabular View</h2>
+       <div class="question">
+        <button class="wrongAnswer" onclick="showResultE()">Show/hide</button>
+        
+      </div>
+     
+        
+       
+       <div id="City_data" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+        <h3>Tabular view of {{city}}</h3>
+        <form method="get" action="{{ url_for('static', filename='rdf/out.csv') }}">
+            <button type="submit">Download CSV</button>
+         </form>
+        {{ City_data | safe }} 
+        
+       </div>
+       
+     
+
+    </body>
+   
+    <script>
+    
+        function showResultE() {
+          var res = document.getElementById('City_data');
+        
+         
+          if(res.style.display == "none"){
+              res.style.display="block";
+              
+  
+          }
+          else{
+              res.style.display="none";
+  
+          }
+          
+        }
+        showResultE()
+        
+      </script>
+
+{% endblock %}

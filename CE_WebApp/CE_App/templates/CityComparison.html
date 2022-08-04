@@ -1,0 +1,95 @@
+{% extends 'ScheduleVizHomePage.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <form method="POST" action="/plot_comparison/" >
+        <style> 
+            #City_A {
+                float:left; 
+                background:Gray;
+                width:50%;
+                height:280px;
+            }
+            #City_B{
+                float:right; 
+                background:Biege;
+                width:50%;
+                height:280px;
+            }
+            #container{
+                display: none;
+            }
+        
+        </style>          
+            
+                    
+            <select name="city A" class=="selectpicker form-control">
+                <option value="" disabled selected>Select City A</option>
+              {% for o in CityList %}
+              <option value="{{ o }}">{{ o }}</option>
+              {% endfor %}
+            </select>
+            <select name="city B" class=="selectpicker form-control">
+                <option value="" disabled selected>Select City B</option>
+              {% for o in CityList %}
+              <option value="{{ o }}">{{ o }}</option>
+              {% endfor %}
+            </select>
+    <input type='submit' value='Filter'>
+</form>
+</head>
+    <body> 
+    <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot_ | safe}};
+            Plotly.plot('bargraph',graphs,{});
+        </script>
+       </div>
+       <h2>Dataset view of Frequencies</h2>
+       <div class="question">
+        <button class="wrongAnswer" onclick="showResultE()">Show/hide</button>
+        
+      </div>
+      
+       
+       <div id="container">
+       <div id="City_A" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+        <h3>Tabular view of {{dataCity_A}}</h3>
+        <form method="get" action="{{ url_for('static', filename='rdf/City_A.csv') }}">
+            <button type="submit">Download {{dataCity_A}}'s CSV</button>
+         </form>
+        {{ City_A | safe }} 
+       </div>
+       <div id="City_B" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+        <h3>Tabular view of {{dataCity_B}}</h3>
+        <form method="get" action="{{ url_for('static', filename='rdf/City_B.csv') }}">
+            <button type="submit">Download City for {{dataCity_B}}'s CSV</button>
+         </form>
+        {{ City_B | safe }} 
+       </div>
+    </div>
+    </body>
+     <script>
+    
+      function showResultE() {
+        var res = document.getElementById('container');
+        
+      
+       
+        if(res.style.display == "none"){
+            res.style.display="block";
+            
+
+        }
+        else{
+            res.style.display="none";
+
+        }
+      }
+      showResultE()
+    </script>
+{% endblock %}

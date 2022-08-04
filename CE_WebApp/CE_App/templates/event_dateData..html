@@ -1,0 +1,96 @@
+{% extends 'EventVizHomePage.html' %}
+{%block head%}
+<style>
+#date_data{
+    display: none;
+}
+</style>
+
+{%endblock%}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+    <body>
+        <form method="POST" action="/eventDateData" >
+             
+            
+                    
+            <select name="city" class=="selectpicker form-control">
+                <option value="" disabled selected>Select City</option>
+                <option value="None"> All</option>
+              {% for o in cityList %}
+              <option value="{{ o }}">{{ o }}</option>
+              {% endfor %}
+            </select>
+  
+             
+            
+                    
+            <select name="from" class=="selectpicker form-control">
+                <option value="" disabled selected>From</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+            <select name="to" class=="selectpicker form-control">
+                <option value="" disabled selected>To</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+            </select>
+    <input type='submit' value='Filter'>
+</form>
+    <div class="chart" id="bargraph">
+        <script>
+            var graphs = {{plot_ | safe}};
+            Plotly.plot('bargraph',graphs,{});
+        </script>
+       </div>
+       <h2>Tabular View</h2>
+       
+       
+        <button class="wrongAnswer" onclick="showResultE()">Show/hide</button>
+        
+      
+      
+        
+       <div id="date_data" style="overflow-y:scroll; overflow-x:hidden; height:200px;">
+            <h3>{{year1}} to {{year2}}</h3>
+             {{dateData | safe}}
+           </div>
+
+     
+
+    </body>
+    <script>
+    
+        function showResultE() {
+          var res = document.getElementById('date_data');
+        
+         
+          if(res.style.display == "none"){
+              res.style.display="block";
+              
+  
+          }
+          else{
+              res.style.display="none";
+  
+          }
+        }
+        showResultE()
+        
+      </script>
+{% endblock %}
