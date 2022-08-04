@@ -1,6 +1,15 @@
-# Flask FOAF
+# CE_WebApp 
 
-This code accompanies the tutorial at
-<http://www.paulbrownmagic.com/blog/flask_foaf>. Each commit corresponds
-to a section of the tutorial.
-
+Packages required:
+1.flask 
+2.rdflib==6.1.1 (the current .nt files have to be rerun using the new version, if you are using the files I have provided for the knowledge graph use rdflib 6.1.1)
+3.numpy
+4.pandas 
+5.networkx 
+6.matplotlib
+7.SPARQLWrapper 
+8.pathlib  
+9.gastrodon 
+10.plotly.express
+File required:
+Download the folder from google drive from this link: https://drive.google.com/drive/folders/1bWUXsbmxwverHBZQExr-_onXRcq4aZf8?usp=sharing and store in CE_WebApp->CE_App
