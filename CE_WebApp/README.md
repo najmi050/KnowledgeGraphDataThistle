@@ -12,4 +12,4 @@ Packages required:
 9.gastrodon 
 10.plotly.express
 File required:
-Download the folder from google drive from this link: https://drive.google.com/drive/folders/1bWUXsbmxwverHBZQExr-_onXRcq4aZf8?usp=sharing and store in CE_WebApp->CE_App
+download the folder from google drive from this link https://drive.google.com/drive/folders/1bWUXsbmxwverHBZQExr-_onXRcq4aZf8?usp=sharing and store in CE_WebApp->CE_App
