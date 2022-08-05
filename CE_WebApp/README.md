@@ -13,3 +13,7 @@
 10. plotly.express
 ## Files required:
 Download the folder from google drive from this link https://drive.google.com/drive/folders/1bWUXsbmxwverHBZQExr-_onXRcq4aZf8?usp=sharing and store in CE_WebApp->CE_App
+
+##Instructions to run
+1. Download all the necessary packages and files
+2. Run the notebook by '<Folder_name>/CE_WebApp/dev.py'.
