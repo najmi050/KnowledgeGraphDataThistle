@@ -461,7 +461,7 @@ def VisulisePerformancesCatgory():
 def ScheduleMap():
       if(request.form.get('city')==None or request.form.get('city')=="None"):
             locations=e.select('''
-SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_Frequency) 
+SELECT ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_Frequency) 
 
     WHERE {
       {
@@ -488,15 +488,15 @@ SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_
   initNs = { "ce": ce}
 )     
             locations= locations.reset_index()
-            fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Schedule_Frequency"],
-                        color_discrete_sequence=["red"], zoom=3, height=500)
+            fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Schedule_Frequency"],
+                        size='Schedule_Frequency',color_discrete_sequence=["red"], zoom=3, height=500)
             fig.update_layout(mapbox_style="open-street-map")
             fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
             return render_template("schedule_map.html",plot_=fig.to_json(),cityList=cities(schedules))
       else:   
         city=request.form.get('city')
         locations=e.select('''
-  SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_Frequency) 
+  SELECT   ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_Frequency) 
 
       WHERE {
         {
@@ -531,8 +531,8 @@ SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_
     initNs = { "ce": ce}
   ) 
         locations= locations.reset_index()
-        fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Schedule_Frequency"],
-                        color_discrete_sequence=["red"], zoom=3, height=500)
+        fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Schedule_Frequency"],
+                         size='Schedule_Frequency',color_discrete_sequence=["red"], zoom=3, height=500)
         fig.update_layout(mapbox_style="open-street-map")
         fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         return render_template("schedule_map.html",plot_=fig.to_json(),cityList=cities(schedules))
@@ -542,7 +542,7 @@ SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?schedules )as ?Schedule_
 def EventMap():
       if(request.form.get('city')==None or request.form.get('city')=="None"):
             locations=e.select('''
-SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Frequency) 
+SELECT  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Frequency) 
 
     WHERE {
       {
@@ -573,15 +573,15 @@ SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Freque
   initNs = { "ce": ce}
 )     
             locations= locations.reset_index()
-            fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Event_Frequency"],
-                        color_discrete_sequence=["red"], zoom=3, height=500, title="Event Map")
+            fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Event_Frequency"],
+                        size='Event_Frequency',color_discrete_sequence=["red"], zoom=3, height=500, title="Event Map")
             fig.update_layout(mapbox_style="open-street-map")
             fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
             return render_template("event_map.html",plot_=fig.to_json(),cityList=cities(schedules))
       else:   
         city=request.form.get('city')
         locations=e.select('''
-  SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Frequency) 
+  SELECT  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Frequency) 
 
       WHERE {
         {
@@ -615,8 +615,8 @@ SELECT ?Town  ?lat ?long ?id ?Name ?Place_Name (count (?events )as ?Event_Freque
     initNs = { "ce": ce}
   ) 
         locations= locations.reset_index()
-        fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Event_Frequency"],
-                        color_discrete_sequence=["red"], zoom=3, height=500, title="Event Map for "+city)
+        fig = px.scatter_mapbox(locations, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Event_Frequency"],
+                        size='Event_Frequency',color_discrete_sequence=["red"], zoom=3, height=500, title="Event Map for "+city)
         fig.update_layout(mapbox_style="open-street-map")
         fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         return render_template("event_map.html",plot_=fig.to_json(),cityList=cities(schedules))
@@ -628,8 +628,8 @@ def PerformanceMap():
       if(request.form.get('city')==None or request.form.get('city')=="None"):
            
             
-            fig = px.scatter_mapbox(locations, title="Performance Map", lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Total_Performances"],
-                        color_discrete_sequence=["red"], zoom=3, height=500)
+            fig = px.scatter_mapbox(locations, title="Performance Map", lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Total_Performances"],
+                        size= 'Total_Performances',color_discrete_sequence=["red"], zoom=3, height=500)
             fig.update_layout(mapbox_style="open-street-map")
             fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
             return render_template("performance_map.html",plot_=fig.to_json(),cityList=cities(schedules))
@@ -637,8 +637,8 @@ def PerformanceMap():
         city=request.form.get('city')
         
         locations= locations[locations['Town']==city]
-        fig = px.scatter_mapbox(locations, title="Performance Map for "+city, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","Town","id", "Total_Performances"],
-                        color_discrete_sequence=["red"], zoom=3, height=500)
+        fig = px.scatter_mapbox(locations, title="Performance Map for "+city, lat="lat", lon="long", hover_name="Name", hover_data=["Place_Name","id", "Total_Performances"],
+                        size= 'Total_Performances', color_discrete_sequence=["red"], zoom=3, height=500)
         fig.update_layout(mapbox_style="open-street-map")
         fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         return render_template("performance_map.html",plot_=fig.to_json(),cityList=cities(schedules))
