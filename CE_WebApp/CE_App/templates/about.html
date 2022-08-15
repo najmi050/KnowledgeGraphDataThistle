@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    figure {
+      border: 1px #cccccc solid;
+      padding: 4px;
+      margin: auto;
+    }
+    
+    caption {
+      background-color: black;
+      color: white;
+      font-style: italic;
+      padding: 2px;
+      text-align: center;
+    }
+    </style>
+<h1>This project builds upon the work done in the ToLCAAH project.</h1>
+</br>
+<p>This application is for the purpose of visualising the data acquired from Data Thistle, regarding the Cultural Events in the region
+defined by the Edinburgh and Southeast Scotland City Region Deal.</p>
+
+
+For the purpose of understanding the app and the project, it is important to know the terms defined below. Please refer to the figure, to get a better understanding of these definitions:
+</br>
+•	An event is a particular event given by a unique number event_id, which has (atleast) a schedule and a performance. For example, the screening of Ghost busters.
+</br>
+•	A schedule is the number of times an event took place at a particular place. For example, the screening of Ghost busters (an event) at Odean, VUE Omni Centre and Dominion have 3 separate schedules.
+</br>
+•	A performance refers to an instance of an event occurring at a particular time and place. For example, the screening of Ghost busters (an event) at Odean at 10:30 pm, 2 Dec 2016.
+</br>
+<figure>
+    <figcaption>Events vs Schedules vs Performances</figcaption>
+<img  src="{{ url_for('static', filename='rdf/EventsSchedulesPerformances.png') }}" alt="Resultado final" class="center">
+
+</figure>
+The levels in the application are defined as follows:
+</br>
+<h2>Event Level</h2>
+At the Event level, we get an overview of the events, disregarding the schedule (time and place), ticket or performance specific attributes and properties. Therefore, research questions such as whether a performance is cancelled or sold out cannot be determined at this level. However, this does not imply that we cannot ask questions relating to time and place at this level. Referring to the Ghost buster’s movie example, all the ghost buster screenings (performances) would count as a single event. The frequency at this level will depict the distinct events occurring at a place/town, belonging to a certain category or having a specific tag and taking place at a certain time (or period).
+
+<h2>Schedule Level</h2>
+At the Schedule level, the time spans and place are taken into account, the events taking place on a specific place (place_id) and have start time (start_ts). However, disregarding the ticket and performance specific properties. Once again referring to the ghost buster example, a screening at a VUE omni centre would be a different schedule from the one at other places. Unlike event level, the frequency would depict the events taking place at different venues to be counted as more than one (equal to the places it occurs).
+
+<h2>Performance Level</h2>
+At the Performance level we take the time, place and performance specific properties. Therefore, the frequency the frequency would depict the events taking place at a single place (schedules) would have several performances. This implies, that every time an event occurs at a specific place at a specific time it would account for one performance. For example, every time the Ghostbuster movie is screened at VUE Omni centre it is a single performance.
+
+
+
+{% endblock %}
+{%block footer%}
+
+{%endblock%}

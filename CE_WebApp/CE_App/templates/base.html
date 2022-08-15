@@ -65,6 +65,21 @@
         width: 60%;
        
       }
+      
+        figure {
+          border: 1px #cccccc solid;
+          padding: 4px;
+          margin: auto;
+        }
+        
+        figcaption {
+          background-color: black;
+          color: white;
+          font-style: italic;
+          padding: 2px;
+          text-align: center;
+        }
+       
  
 
 </style> 
@@ -89,7 +104,10 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-       
+        <a class="navbar-brand" href="{{ url_for('about')}}">About </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
 
     </nav>
@@ -182,8 +200,12 @@
  
       {% block footer %} 
 
-      <img  src="{{ url_for('static', filename='rdf/dataModel.png') }}" alt="Resultado final" class="center">
-     
+    
+      <figure>
+       
+        <img  src="{{  url_for('static', filename='rdf/dataModel.png') }}" alt="Resultado final" class="center">
+        <figcaption>Entity-Relationship diagram for Cultural Events</figcaption>
+      </figure>
       {% endblock %}
  
 

@@ -329,6 +329,9 @@ def VisualsePerformanceCatFreq():
       print(category)
       return render_template("PerformanceVizHomePage.html",plo_=fig.to_json())
 
+@app.route('/about')
+def about():
+      return render_template('about.html')
 @app.route("/plot_comparison/",methods=['GET', 'POST'])
 def plot_comparison():
       if(request.form.get('city A')== None):
